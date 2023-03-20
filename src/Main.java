@@ -48,6 +48,10 @@ public class Main {
             System.out.println(orders.allOrdersNumber());
             System.out.println(orders.getAllOpenOrdersList());
             System.out.println(orders.allOrdersForTable(table1));
+            System.out.println(orders.getDishSet());
+            orders.getOrderList().forEach(item ->System.out.println(item));
+            System.out.println(orders.averagePreparationTimeInTimeFrame(LocalTime.of(12,42),LocalTime.of(15,42)));
+            System.out.println(orders.getOrdersPricePerWaiter());
 
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());
