@@ -56,10 +56,12 @@ public class Dish {
         setMainImage(this.images.get(0));
     }
 
-    public void removeImage(int index) {
+    public void removeImage(int index) throws DishException {
         if (this.images.size() == 1) {
             this.images.remove(index);
             setMainImage(Settings.getBlankImage());
+        } else if (this.images.size() < 1){
+            throw new DishException("You can not remove all images from dish: " + getTitle());
         } else {
             this.images.remove(index);
             setMainImage(this.images.get(0));
