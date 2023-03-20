@@ -7,12 +7,16 @@ public class Main {
     public static void main(String[] args) {
         DishList dList = new DishList();
         try {
-            dList.readFromTxt(Settings.getFilenameIn(),Settings.getDelimeter1(),Settings.getDelimeter2());
+            dList.readFromTxt(Settings.getFilename(),Settings.getDelimeter1(),Settings.getDelimeter2());
+            dList.saveToTxt(Settings.getFilename(),Settings.getDelimeter1());
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());
         }
 
-        dList.forEach(dish -> System.out.println(dish.getTitle()));
+        for (Dish dish : dList) {
+            System.out.println(dish.getTitle());
+            System.out.println(dish.getPrice());
+        }
     }
 
 

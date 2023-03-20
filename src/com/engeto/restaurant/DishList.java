@@ -40,11 +40,11 @@ public class DishList extends ArrayList<Dish> {
         } catch (NumberFormatException e) {
             throw new DishException(
                     "There is a wrong number format on line: " + lineNumber + "\nRow: " + line + "\n"
-                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilenameIn() + "\"");
+                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilename() + "\"");
         } catch (IllegalArgumentException e) {
             throw new DishException(
                     "There is a wrong category format on line: " + lineNumber + "\nRow: " + line + "\n"
-                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilenameIn() + "\"");
+                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilename() + "\"");
         }
     }
 
