@@ -10,7 +10,7 @@ public class Waiter {
     }
 
     public int getWaiterNum() {
-        return waiterNum;
+        return this.waiterNum;
     }
 
     public void setWaiterNum(int waiterNum) {
@@ -18,7 +18,7 @@ public class Waiter {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -29,4 +29,5 @@ public class Waiter {
     public String toString() {
         return name +" No."+ waiterNum;
     }
+
 }

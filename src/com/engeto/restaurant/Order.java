@@ -3,7 +3,7 @@ package com.engeto.restaurant;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Order {
+public class Order{
     //TODO set the fulfillmentTime to LocalTime.MIN
     private static int nextId = 1;
     private int id;

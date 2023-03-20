@@ -1,6 +1,8 @@
 import com.engeto.restaurant.*;
 
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.List;
 
 
 public class Main {
@@ -35,8 +37,8 @@ public class Main {
         try {
             Waiter waiter1 = new Waiter(1,"Tom");
             Table table1 = new Table(1);
-            Order order1 =new Order(table1,waiter1,menu.getDishFromMenu(1),4, LocalTime.now());
-            Order order25 =new Order(table1,waiter1,menu.getDishFromMenu(2), 5, LocalTime.now());
+            Order order1 =new Order(table1,waiter1,menu.getDishFromMenu(1),4, LocalTime.of(8,45));
+            Order order25 =new Order(table1,waiter1,menu.getDishFromMenu(2), 5, LocalTime.of(9,55));
             Order order3 =new Order(table1,waiter1,menu.getDishFromMenu(0), 20, LocalTime.now());
             System.out.println(order1);
             order1.setFulfilmentTime(LocalTime.of(15,45));
@@ -53,8 +55,12 @@ public class Main {
             System.out.println(orders.allOrdersForTable(table1));
             System.out.println(orders.getDishSet());
             orders.getOrderList().forEach(item ->System.out.println(item));
-            System.out.println(orders.averagePreparationTimeInTimeFrame(LocalTime.of(12,42),LocalTime.of(15,42)));
+            System.out.println(orders.averagePreparationTimeInTimeFrame(LocalTime.of(12,42),LocalTime.of(17,42)));
             System.out.println(orders.getOrdersPricePerWaiter());
+            List<Order> newOrders = orders.getOrderList();
+
+            Collections.sort(newOrders, new OrderOrderedTimeComparator());
+            System.out.println(newOrders);
 
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());
