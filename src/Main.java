@@ -23,7 +23,7 @@ public class Main {
         Menu.addDish(dList.get(1));
         Menu.addDish(dList.get(5));
         Menu.clearAll();
-        System.out.println(menu);
+
     }
 
 
