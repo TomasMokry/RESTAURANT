@@ -17,6 +17,13 @@ public class Main {
             System.out.println(dish.getTitle());
             System.out.println(dish.getPrice());
         }
+
+        Menu menu = new Menu();
+        Menu.addDish(dList.get(0));
+        Menu.addDish(dList.get(1));
+        Menu.addDish(dList.get(5));
+        Menu.clearAll();
+        System.out.println(menu);
     }
 
 
