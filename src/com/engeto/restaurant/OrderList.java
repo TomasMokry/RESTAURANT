@@ -31,7 +31,15 @@ public class OrderList {
         }
         return openOrders;
     }
-    //Možnost seřadit objednávky podle číšníka nebo času zadání.
+    //TODO Možnost seřadit objednávky podle číšníka nebo času zadání.
+    //TODO ukladani a nacitani z txt
+    //TODO dobrovolne
+    //Možnost přidávat či odebírat kategorie jídel.
+    //Jídlo může být ve více kategoriích zároveň.
+    //Objednávku pro stůl lze uzavřít (close) až v okamžiku, kdy jsou všechny položky (item) zaplaceny.
+    //Objednávky od jednoho stolu by měly jít převést k jinému stolu,
+    // když si hosté přesednou. Dokonce si mohou přisednout k hostům u jiného stolu.
+    // (Dále už nemusí jít v systému rozlišit, které objednávky jsou převedeny, přesun tedy nemusí být vratná operace.)
 
     public String getOrdersPricePerWaiter(){
         Map<Waiter, Integer> waiterPricesMap = new HashMap<>();

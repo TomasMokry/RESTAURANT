@@ -5,6 +5,9 @@ import java.time.LocalTime;
 
 public class Main {
     public static void main(String[] args) {
+
+        //TODO napsat testovaci scenar
+
         DishList dList = new DishList();
         try {
             dList.readFromTxt(Settings.getFilename(),Settings.getDelimeter1(),Settings.getDelimeter2());
