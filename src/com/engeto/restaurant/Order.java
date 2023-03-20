@@ -85,16 +85,12 @@ public class Order {
 
     @Override
     public String toString() {
-        String idString;
-        if (this.id > 0 && this.id < 10) idString = " " + String.valueOf(this.id);
-        else idString = String.valueOf(this.id);
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         String fulfillmentTimeString;
         if (this.fulfillmentTime == null)fulfillmentTimeString = "in process";
         else fulfillmentTimeString = this.fulfillmentTime.format(formatter);
-        return idString
+        return id
                 + ". "
                 + dish.getTitle()
                 + " " + dishNumber + "x"
