@@ -1,6 +1,7 @@
 package com.engeto.restaurant;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Dish {
     private String title;
@@ -87,5 +88,17 @@ public class Dish {
     @Override
     public String toString() {
         return  title + " - " + price + ",- Kč";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Dish dish)) return false;
+        return getTitle().equals(dish.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle());
     }
 }

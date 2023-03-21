@@ -55,12 +55,17 @@ public class Main {
             System.out.println(orders.allOrdersForTable(table1));
             System.out.println(orders.getDishSet());
             orders.getOrderList().forEach(item ->System.out.println(item));
-            System.out.println(orders.averagePreparationTimeInTimeFrame(LocalTime.of(12,42),LocalTime.of(17,42)));
+           // System.out.println(orders.averagePreparationTimeInTimeFrame(LocalTime.of(12,42),LocalTime.of(17,42)));
             System.out.println(orders.getOrdersPricePerWaiter());
             List<Order> newOrders = orders.getOrderList();
 
             Collections.sort(newOrders, new OrderOrderedTimeComparator());
             System.out.println(newOrders);
+
+            orders.saveToTxt(Settings.getFilenameOrders(),Settings.getDelimeter1());
+            orders.readFromTxt(Settings.getFilenameOrders(),Settings.getDelimeter1(),Settings.getDelimeter2());
+
+            orders.getOrderList().forEach(item ->System.out.println(item));
 
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());

@@ -1,5 +1,6 @@
 package com.engeto.restaurant;
 
+import java.io.*;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -31,7 +32,7 @@ public class OrderList {
         }
         return openOrders;
     }
-    //TODO Možnost seřadit objednávky podle číšníka nebo času zadání.
+
     //TODO ukladani a nacitani z txt
     //TODO dobrovolne
     //Možnost přidávat či odebírat kategorie jídel.
@@ -134,6 +135,74 @@ public class OrderList {
             }
         }
         return text1 + "\n" + text2 + "\n" + text3 + "\n\n" + text4;
+    }
+
+    public void readFromTxt(String filename, String delimeter1, String delimeter2) throws DishException {
+        this.orderList.clear();
+        int lineNumber = 0;
+        String line = "";
+        String[] items = new String[0];
+        String imagesAll = "";
+        String[] images = new String[0];
+
+        try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(filename)))){
+            while(scanner.hasNextLine()){
+                lineNumber++;
+                line = scanner.nextLine();
+                items = line.split(delimeter1);
+
+                if (items.length != 11) throw new DishException("Wrong number of items on row: " + lineNumber);
+
+                imagesAll = items[6].substring(1,items[6].length()-1);
+                images = imagesAll.split(delimeter2);
+                ArrayList<String> imagesList = new ArrayList<>();
+                for (int i = 0; i<images.length;i++){imagesList.add(images[i].trim());}
+
+                Table table = new Table(Integer.parseInt(items[0]));
+                Waiter waiter = new Waiter(Integer.parseInt(items[1]),items[2]);
+                Dish dish = new Dish(items[3],
+                        Integer.parseInt(items[4]),
+                        Integer.parseInt(items[5]),
+                        imagesList,Category.valueOf(items[7]));
+                Order order = new Order(table,waiter,dish,Integer.parseInt(items[8]),LocalTime.parse(items[9]));
+                orderList.add(order);
+
+
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new DishException("Can not find a file: "+ filename
+                    +"\n"+e.getLocalizedMessage());
+        } catch (NumberFormatException e) {
+            throw new DishException(
+                    "There is a wrong number format on line: " + lineNumber + "\nRow: " + line + "\n"
+                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilename() + "\"");
+        } catch (IllegalArgumentException e) {
+            throw new DishException(
+                    "There is a wrong category format on line: " + lineNumber + "\nRow: " + line + "\n"
+                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilename() + "\"");
+        }
+    }
+
+    public void saveToTxt(String filename, String delimeter ) throws DishException {
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
+            for (Order order : this.orderList){
+                String record = order.getTable().getTableNumber() + delimeter
+                        + order.getWaiter().getWaiterNum() + delimeter
+                        + order.getWaiter().getName() + delimeter
+                        + order.getDish().getTitle() + delimeter
+                        + order.getDish().getPrice() + delimeter
+                        + order.getDish().getPreparationTime() + delimeter
+                        + order.getDish().getImages() + delimeter
+                        + order.getDish().getCategory() + delimeter
+                        + order.getDishNumber() + delimeter
+                        + order.getOrderedTime() + delimeter
+                        + order.getFulfilmentTime() + delimeter;
+                writer.println(record);
+            }
+        } catch (IOException e) {
+            throw new DishException("There is problem with file writing " + e.getLocalizedMessage());
+        }
     }
 
 
