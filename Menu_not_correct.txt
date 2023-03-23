@@ -1,0 +1,3 @@
+Kuřecí řízek obalovaný 15O g;156;20;[kureci_rizek_obalovany_1, kureci_rizek_obalovany_2];MAIN_DISH
+Pstruh na víně 200 g;195;35;[Pstruh_na_vine_1, Pstruh_na_vine_2, Pstruh_na_vine_3];MAIN_DISH
+Guláš 150 g;145;25;[Gulas_1, Gulas_2];MAIN_DISH

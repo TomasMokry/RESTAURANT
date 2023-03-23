@@ -1,6 +1,0 @@
-15;1;Tom;Kuřecí řízek obalovaný 150 g;156;20;[kureci_rizek_obalovany_1, kureci_rizek_obalovany_2];MAIN_DISH;2;13:45;14:05;
-15;1;Tom;Pstruh na víně 200 g;195;35;[Pstruh_na_vine_1, Pstruh_na_vine_2, Pstruh_na_vine_3];MAIN_DISH;2;13:55;00:00;
-15;1;Tom;Guláš 150 g;145;25;[Gulas_1, Gulas_2];MAIN_DISH;3;13:58;14:35;
-2;2;Lenka;Pstruh na víně 200 g;195;35;[Pstruh_na_vine_1, Pstruh_na_vine_2, Pstruh_na_vine_3];MAIN_DISH;5;14:30;00:00;
-1;1;Tom;Pstruh na víně 200 g;195;35;[Pstruh_na_vine_1, Pstruh_na_vine_2, Pstruh_na_vine_3];MAIN_DISH;5;12:30;00:00;
-1;1;Tom;Pstruh na víně 200 g;195;35;[Pstruh_na_vine_1, Pstruh_na_vine_2, Pstruh_na_vine_3];MAIN_DISH;5;11:45;00:00;

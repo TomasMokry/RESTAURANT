@@ -10,18 +10,16 @@ public class Main {
         DishList dishesList = new DishList();
         OrderEvidence orders = new OrderEvidence();
 
-        // Reading the dishesList and orders from txt files.
+        // Reading the dishesList ,menu, table notes and orders from txt files.
         try {
             dishesList.readFromTxt(Settings.getFilename(),Settings.getDelimeter1(),Settings.getDelimeter2());
             Menu.readFromTxt(Settings.getFilenameMenu(),Settings.getDelimeter1(),Settings.getDelimeter2());
             orders.readFromTxt(Settings.getFilenameOrders(),Settings.getDelimeter1(),Settings.getDelimeter2());
+            TableNotes.readFromTxt(Settings.getFilenameNotes(),Settings.getDelimeter3());
+
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());
         }
-
-        System.out.println(dishesList);
-        System.out.println(orders.getOrderList());
-
 
         // Create 2 waiters
         Waiter waiter1 = new Waiter(1,"Tom");
@@ -40,7 +38,6 @@ public class Main {
         ArrayList<String> dishImages5 = new ArrayList<>();
         ArrayList<String> dishImages6 = new ArrayList<>();
 
-
         dishImages1.add("kureci_rizek_obalovany_1");
         dishImages1.add("kureci_rizek_obalovany_2");
         dishImages2.add("Hranolky_1");
@@ -50,7 +47,6 @@ public class Main {
         dishImages3.add("Pstruh_na_vine_2");
         dishImages3.add("Pstruh_na_vine_3");
         dishImages4.add("Cesnecka_1");
-        dishImages5.add("Jablecny_zavin_1");
         dishImages6.add("Gulas_1");
         dishImages6.add("Gulas_2");
 
@@ -73,12 +69,18 @@ public class Main {
 
         // Create 3 orders for table 15 and 1 for table 2 and 2 orders for table 1
         try {
-            orders.addOrder(new Order(table15, waiter1, Menu.getDishFromMenu(0), 2, LocalTime.of(13,45)));
-            orders.addOrder(new Order(table15, waiter1, Menu.getDishFromMenu(1),2, LocalTime.of(13,55)));
-            orders.addOrder(new Order(table15, waiter1, Menu.getDishFromMenu(2),3, LocalTime.of(13,58)));
-            orders.addOrder(new Order(table2, waiter2, Menu.getDishFromMenu(1),5, LocalTime.of(14,30)));
-            orders.addOrder(new Order(table1, waiter1, Menu.getDishFromMenu(1),5, LocalTime.of(12,30)));
-            orders.addOrder(new Order(table1, waiter1, Menu.getDishFromMenu(1),5, LocalTime.of(11,45)));
+            orders.addOrder(new Order(table15, waiter1,
+                    Menu.getDishFromMenu(0), 2, LocalTime.of(13,45)));
+            orders.addOrder(new Order(table15, waiter1,
+                    Menu.getDishFromMenu(1),2, LocalTime.of(13,55)));
+            orders.addOrder(new Order(table15, waiter1,
+                    Menu.getDishFromMenu(2),3, LocalTime.of(13,58)));
+            orders.addOrder(new Order(table2, waiter2,
+                    Menu.getDishFromMenu(1),5, LocalTime.of(14,30)));
+            orders.addOrder(new Order(table1, waiter1,
+                    Menu.getDishFromMenu(1),5, LocalTime.of(12,30)));
+            orders.addOrder(new Order(table1, waiter1,
+                    Menu.getDishFromMenu(1),5, LocalTime.of(11,45)));
 
             orders.addOrder(new Order(table2, waiter2, dishesList.get(1),5, LocalTime.of(14,30)));
         } catch (DishException e) {
@@ -88,6 +90,10 @@ public class Main {
         // Some orders are finished
         orders.getOrderList().get(0).setFulfilmentTime(LocalTime.of(14,5));
         orders.getOrderList().get(2).setFulfilmentTime(LocalTime.of(14,35));
+
+        // Some tables has notes
+        TableNotes.addNote(table15,"Great meal and " + waiter1.getName() + " was supper friendly");
+        TableNotes.addNote(table2,"We love this restaurant, food great but " + waiter2.getName()+ " was mean.");
 
         // How many orders all together
         System.out.println("---\n");
@@ -142,7 +148,8 @@ public class Main {
         System.out.println("---\n");
         System.out.println("Average process time for all orders in specific time frame ( 8:00 - 16:00 )");
         try {
-            System.out.println(orders.getAveragePreparationTimeInTimeFrame(LocalTime.of(8,0),LocalTime.of(16,0)));
+            System.out.println(orders.getAveragePreparationTimeInTimeFrame(LocalTime.of(8,0),
+                    LocalTime.of(16,0)));
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());
         }
@@ -156,13 +163,15 @@ public class Main {
         System.out.println("---\n");
         System.out.println("Orders for specific table (example table 15):\n");
         System.out.println(orders.getAllOrdersForTable(table15));
-
+        System.out.println("Notes for table "+table15.getTableNumber()+" :");
+        System.out.println(TableNotes.getAllTablesNotes().get(table15));
 
         // Write all data to txt
         try {
             dishesList.saveToTxt(Settings.getFilename(),Settings.getDelimeter1());
             Menu.saveToTxt(Settings.getFilenameMenu(),Settings.getDelimeter1());
             orders.saveToTxt(Settings.getFilenameOrders(),Settings.getDelimeter1());
+            TableNotes.saveToTxt(Settings.getFilenameNotes(),Settings.getDelimeter3());
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());
         }

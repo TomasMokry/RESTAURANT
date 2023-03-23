@@ -15,8 +15,8 @@ public class Dish {
         this.title = title;
         this.price = price;
         this.preparationTime = preparationTime;
-        this.images = images;
-        this.mainImage = images.get(0);
+        this.setImages(images);
+        this.setMainImageDefault(images);
         this.category = category;
     }
 
@@ -49,7 +49,12 @@ public class Dish {
     }
 
     public void setImages(ArrayList<String> images) {
-        this.images = images;
+        if (images.isEmpty()){
+            this.images = new ArrayList<>();
+            this.images.add(Settings.getBlankImage());
+        } else {
+            this.images = images;
+        }
     }
 
     public void addImage(String newImage){
@@ -73,6 +78,13 @@ public class Dish {
         return mainImage;
     }
 
+    public void setMainImageDefault(ArrayList<String> image){
+        if (images.isEmpty()){
+            this.mainImage = Settings.getBlankImage();
+        } else {
+            this.mainImage = images.get(0);
+        }
+    }
     public void setMainImage(String mainImage) {
         this.mainImage = mainImage;
     }
@@ -87,7 +99,7 @@ public class Dish {
 
     @Override
     public String toString() {
-        return  title + " - " + price + ",- Kč";
+        return  title;
     }
 
     @Override

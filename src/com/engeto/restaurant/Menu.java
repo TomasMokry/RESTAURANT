@@ -33,9 +33,9 @@ public class Menu {
 
         int lineNumber = 0;
         String line = "";
-        String[] items = new String[0];
-        String imagesAll = "";
-        String[] images = new String[0];
+        String[] items;
+        String imagesAll;
+        String[] images;
 
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(filename)))){
             while(scanner.hasNextLine()){
@@ -48,7 +48,9 @@ public class Menu {
                 imagesAll = items[3].substring(1,items[3].length()-1);
                 images = imagesAll.split(delimeter2);
                 ArrayList<String> imagesList = new ArrayList<>();
-                for (int i = 0; i<images.length;i++){imagesList.add(images[i].trim());}
+                for (String image : images) {
+                    imagesList.add(image.trim());
+                }
 
 
                 Dish dish = new Dish(items[0],
@@ -64,11 +66,11 @@ public class Menu {
         } catch (NumberFormatException e) {
             throw new DishException(
                     "There is a wrong number format on line: " + lineNumber + "\nRow: " + line + "\n"
-                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilename() + "\"");
+                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilenameMenu() + "\"");
         } catch (IllegalArgumentException e) {
             throw new DishException(
                     "There is a wrong category format on line: " + lineNumber + "\nRow: " + line + "\n"
-                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilename() + "\"");
+                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilenameMenu() + "\"");
         }
     }
 
@@ -89,6 +91,6 @@ public class Menu {
 
     @Override
     public String toString() {
-        return "Today's Menu: " + this.menuList;
+        return "Today's Menu: " + menuList;
     }
 }

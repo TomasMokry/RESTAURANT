@@ -2,6 +2,7 @@ package com.engeto.restaurant;
 
 import java.io.*;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class OrderEvidence {
@@ -155,11 +156,15 @@ public class OrderEvidence {
         } catch (NumberFormatException e) {
             throw new DishException(
                     "There is a wrong number format on line: " + lineNumber + "\nRow: " + line + "\n"
-                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilename() + "\"");
+                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilenameOrders() + "\"");
         } catch (IllegalArgumentException e) {
             throw new DishException(
                     "There is a wrong category format on line: " + lineNumber + "\nRow: " + line + "\n"
-                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilename() + "\"");
+                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilenameOrders() + "\"");
+        }catch (DateTimeParseException e) {
+            throw new DishException(
+                    "There is a wrong time format on line: " + lineNumber + "\nRow: " + line + "\n"
+                            + e.getLocalizedMessage() + "\nPlease fix in the \"" + Settings.getFilenameOrders() + "\"");
         }
     }
 
