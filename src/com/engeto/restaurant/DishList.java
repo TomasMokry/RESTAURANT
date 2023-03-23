@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class DishList extends ArrayList<Dish> {
     public void readFromTxt(String filename, String delimeter1, String delimeter2) throws DishException {
+
         int lineNumber = 0;
         String line = "";
         String[] items = new String[0];

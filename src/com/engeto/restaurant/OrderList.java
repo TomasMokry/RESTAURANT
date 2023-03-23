@@ -26,66 +26,41 @@ public class OrderList {
     public ArrayList<Order> getAllOpenOrdersList(){
         ArrayList<Order> openOrders = new ArrayList<>();
         for (Order order : this.orderList){
-            if (order.getFulfilmentTime() == null){
+            if (order.getFulfilmentTime().equals(LocalTime.MIN)){
                 openOrders.add(order);
             }
         }
         return openOrders;
     }
 
-    //TODO ukladani a nacitani z txt
-    //TODO dobrovolne
-    //Možnost přidávat či odebírat kategorie jídel.
-    //Jídlo může být ve více kategoriích zároveň.
-    //Objednávku pro stůl lze uzavřít (close) až v okamžiku, kdy jsou všechny položky (item) zaplaceny.
-    //Objednávky od jednoho stolu by měly jít převést k jinému stolu,
-    // když si hosté přesednou. Dokonce si mohou přisednout k hostům u jiného stolu.
-    // (Dále už nemusí jít v systému rozlišit, které objednávky jsou převedeny, přesun tedy nemusí být vratná operace.)
-
-    public String getOrdersPricePerWaiter(){
+    public Map<Waiter, Integer> getSumOrdersPricePerWaiter(){
         Map<Waiter, Integer> waiterPricesMap = new HashMap<>();
-        Map<Waiter, Integer> waiterOrdersNumberMap = new HashMap<>();
 
         for (Order order : orderList){
             if (! waiterPricesMap.containsKey(order.getWaiter())){
                 waiterPricesMap.put(order.getWaiter(), order.getDish().getPrice());
-                waiterOrdersNumberMap.put(order.getWaiter(), 1);
             } else {
                 int subCount = waiterPricesMap.get(order.getWaiter());
                 subCount += order.getDish().getPrice();
                 waiterPricesMap.put(order.getWaiter(),subCount);
+            }
+        }
+        return waiterPricesMap;
+    }
 
+    public Map<Waiter, Integer> getNumberOfOrdersPerWaiter(){
+        Map<Waiter, Integer> waiterOrdersNumberMap = new HashMap<>();
+
+        for (Order order : orderList){
+            if (! waiterOrdersNumberMap.containsKey(order.getWaiter())){
+                waiterOrdersNumberMap.put(order.getWaiter(), 1);
+            } else {
                 int count = waiterOrdersNumberMap.get(order.getWaiter());
                 count ++;
                 waiterOrdersNumberMap.put(order.getWaiter(), count);
             }
         }
-        String text1 = "Waiter : sum of all prices of his orders";
-        String text2 = "****";
-        String text3="";
-        String text4="";
-        String text5="Waiter : number of his orders";
-        String result;
-
-        for (Map.Entry<Waiter,Integer> entry : waiterPricesMap.entrySet()){
-            Waiter key = entry.getKey();
-            Integer value = entry.getValue();
-            text3 += key + " : " + value+"\n";
-        }
-        for (Map.Entry<Waiter,Integer> entry : waiterOrdersNumberMap.entrySet()){
-            Waiter key = entry.getKey();
-            Integer value = entry.getValue();
-            text4 += key + " : " + value+"\n";
-        }
-        result = text2+"\n"
-                +text1+"\n"
-                +text2+"\n"
-                +text3+"\n"
-                +text2+"\n"
-                +text5+"\n"
-                +text2+"\n"
-                +text4+"\n";
-        return result;
+        return waiterOrdersNumberMap;
     }
 
     public int averagePreparationTimeInTimeFrame(LocalTime from, LocalTime to) throws DishException {
@@ -138,7 +113,7 @@ public class OrderList {
     }
 
     public void readFromTxt(String filename, String delimeter1, String delimeter2) throws DishException {
-        this.orderList.clear();
+
         int lineNumber = 0;
         String line = "";
         String[] items = new String[0];

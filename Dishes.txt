@@ -1,10 +1,18 @@
-Pizza Margherita;179;20;[Pizza_Margherita_01, Pizza_Margherita_02, Pizza_Margherita_03];MAIN_DISH
-Spaghetti Carbonara;229;25;[Spaghetti_Carbonara_01, Spaghetti_Carbonara_02];MAIN_DISH
-Lasagne Bolognese;269;35;[Lasagne_Bolognese_01, Lasagne_Bolognese_02, Lasagne_Bolognese_03];MAIN_DISH
-Risotto Milanese;239;30;[Risotto_Milanese_01];MAIN_DISH
-Vitello alla Milanese;359;40;[Vitello_alla_Milanese_01, Vitello_alla_Milanese_02, Vitello_alla_Milanese_03];MAIN_DISH
-Bruschetta;99;15;[Bruschetta_01, Bruschetta_02, Bruschetta_03, Bruschetta_04];STARTER
-Insalata Caprese;159;10;[Insalata_Caprese_01, Insalata_Caprese_02];STARTER
-Prosciutto e Melone;199;5;[Prosciutto_e_Melone_01, Prosciutto_e_Melone_02, Prosciutto_e_Melone_03];STARTER
-Tiramisu;129;40;[Tiramisu_01, Tiramisu_02, Tiramisu_03, Tiramisu_04];DESSERT
-Gelato;79;5;[Gelato_01, Gelato_02, Gelato_03];DESSERT
+Kuřecí řízek obalovaný 150 g;156;20;[kureci_rizek_obalovany_1, kureci_rizek_obalovany_2];MAIN_DISH
+Hranolky 150 g;50;15;[Hranolky_1, Hranolky_2, Hranolky_3];SIDE
+Pstruh na víně 200 g;195;35;[Pstruh_na_vine_1, Pstruh_na_vine_2, Pstruh_na_vine_3];MAIN_DISH
+Česnečka;65;5;[Cesnecka_1];SOUP
+Jablečný závin 110 g;95;10;[Jablecny_zavin_1];DESSERT
+Guláš 150 g;145;25;[Gulas_1, Gulas_2];MAIN_DISH
+Kuřecí řízek obalovaný 150 g;156;20;[kureci_rizek_obalovany_1, kureci_rizek_obalovany_2];MAIN_DISH
+Hranolky 150 g;50;15;[Hranolky_1, Hranolky_2, Hranolky_3];SIDE
+Pstruh na víně 200 g;195;35;[Pstruh_na_vine_1, Pstruh_na_vine_2, Pstruh_na_vine_3];MAIN_DISH
+Česnečka;65;5;[Cesnecka_1];SOUP
+Jablečný závin 110 g;95;10;[Jablecny_zavin_1];DESSERT
+Guláš 150 g;145;25;[Gulas_1, Gulas_2];MAIN_DISH
+Kuřecí řízek obalovaný 150 g;156;20;[kureci_rizek_obalovany_1, kureci_rizek_obalovany_2];MAIN_DISH
+Hranolky 150 g;50;15;[Hranolky_1, Hranolky_2, Hranolky_3];SIDE
+Pstruh na víně 200 g;195;35;[Pstruh_na_vine_1, Pstruh_na_vine_2, Pstruh_na_vine_3];MAIN_DISH
+Česnečka;65;5;[Cesnecka_1];SOUP
+Jablečný závin 110 g;95;10;[Jablecny_zavin_1];DESSERT
+Guláš 150 g;145;25;[Gulas_1, Gulas_2];MAIN_DISH

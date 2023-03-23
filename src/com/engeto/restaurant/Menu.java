@@ -1,7 +1,6 @@
 package com.engeto.restaurant;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class Menu {
     private static ArrayList<Dish> menuList = new ArrayList<>();
@@ -19,7 +18,7 @@ public class Menu {
     }
 
     public static void addDish(Dish newDish)throws DishException {
-        if (menuList.contains(newDish)) throw new DishException("This Dish "+newDish+ " is already in menu");
+        if (menuList.contains(newDish)) throw new DishException("This Dish " + newDish + " is already in menu");
         menuList.add(newDish);
     }
 
@@ -27,6 +26,8 @@ public class Menu {
         if (index > menuList.size()) throw new DishException("You entered wrong index. Menu has just " + menuList.size());
         return menuList.get(index);
     }
+
+
 
 
     @Override

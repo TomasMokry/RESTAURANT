@@ -4,7 +4,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Order{
-    //TODO set the fulfillmentTime to LocalTime.MIN
     private static int nextId = 1;
     private int id;
 
@@ -23,6 +22,7 @@ public class Order{
         this.setDish(dish);
         this.dishNumber = dishNumber;
         this.orderedTime = orderedTime;
+        this.fulfillmentTime = LocalTime.MIN;
 
     }
 
@@ -80,7 +80,7 @@ public class Order{
 
     public void setDish(Dish dish) throws DishException{
         if (! Menu.getMenuList().contains(dish)){
-            throw new DishException("This dish" +dish.getTitle()+ "is not in the Menu " + Menu.getMenuList());
+            throw new DishException("This dish " +dish.getTitle()+ " is not in the Menu " + Menu.getMenuList());
         } else {this.dish = dish;}
     }
 
