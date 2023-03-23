@@ -2,14 +2,13 @@ import com.engeto.restaurant.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Map;
 
 
 public class Main {
     public static void main(String[] args) {
         DishList dishesList = new DishList();
-        OrderList orders = new OrderList();
+        OrderEvidence orders = new OrderEvidence();
 
         // Reading the dishesList and orders from txt files.
         try {
@@ -87,13 +86,13 @@ public class Main {
         }
 
         // Some orders are finished
-        orders.getOrderList().get(0).setFulfilmentTime(LocalTime.of(14,05));
+        orders.getOrderList().get(0).setFulfilmentTime(LocalTime.of(14,5));
         orders.getOrderList().get(2).setFulfilmentTime(LocalTime.of(14,35));
 
         // How many orders all together
         System.out.println("---\n");
         System.out.println("Number of all orders:");
-        System.out.println(orders.getOrderList().size());
+        System.out.println(orders.getAllOrdersNumber());
 
         // How many currently open orders?
         System.out.println("---\n");
@@ -109,14 +108,14 @@ public class Main {
         System.out.println("---\n");
         System.out.println("Sort orders by waiter:");
         ArrayList<Order> ordersSortedByWaiter = orders.getOrderList();
-        Collections.sort(ordersSortedByWaiter, new OrderWaiterNumberComparator());
+        ordersSortedByWaiter.sort(new OrderWaiterNumberComparator());
         ordersSortedByWaiter.forEach(System.out::println);
 
         // Sort orders by ordered time
         System.out.println("---\n");
         System.out.println("Sort orders by ordered time:");
         ArrayList<Order> ordersSortedByOrderTime = orders.getOrderList();
-        Collections.sort(ordersSortedByOrderTime, new OrderOrderedTimeComparator());
+        ordersSortedByOrderTime.sort(new OrderOrderedTimeComparator());
         ordersSortedByOrderTime.forEach(System.out::println);
 
         // Total price for all orders for each waiter
@@ -143,7 +142,7 @@ public class Main {
         System.out.println("---\n");
         System.out.println("Average process time for all orders in specific time frame ( 8:00 - 16:00 )");
         try {
-            System.out.println(orders.averagePreparationTimeInTimeFrame(LocalTime.of(8,00),LocalTime.of(16,00)));
+            System.out.println(orders.getAveragePreparationTimeInTimeFrame(LocalTime.of(8,0),LocalTime.of(16,0)));
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());
         }
@@ -156,7 +155,7 @@ public class Main {
         // Orders for specific table number
         System.out.println("---\n");
         System.out.println("Orders for specific table (example table 15):\n");
-        System.out.println(orders.allOrdersForTable(table15));
+        System.out.println(orders.getAllOrdersForTable(table15));
 
 
         // Write all data to txt

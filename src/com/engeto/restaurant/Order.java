@@ -87,10 +87,6 @@ public class Order{
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        String fulfillmentTimeString;
-        if (this.fulfillmentTime == null)fulfillmentTimeString = "in process";
-        else fulfillmentTimeString = this.fulfillmentTime.format(formatter);
         return id
                 + ". "
                 + dish.getTitle()
@@ -99,8 +95,8 @@ public class Order{
                 + "Kč):\t"
                 + orderedTime.format(formatter)
                 + "-"
-                + fulfillmentTimeString
-                + " číšník č. "
+                + fulfillmentTime.format(formatter)
+                + "\tčíšník č. "
                 + waiter.getWaiterNum();
     }
 

@@ -4,7 +4,7 @@ import java.io.*;
 import java.time.LocalTime;
 import java.util.*;
 
-public class OrderList {
+public class OrderEvidence {
     private ArrayList<Order> orderList = new ArrayList<>();
 
     public ArrayList<Order> getOrderList() {
@@ -19,7 +19,7 @@ public class OrderList {
         this.orderList.add(newOrder);
     }
 
-    public int allOrdersNumber(){
+    public int getAllOrdersNumber(){
         return orderList.size();
     }
 
@@ -63,7 +63,7 @@ public class OrderList {
         return waiterOrdersNumberMap;
     }
 
-    public int averagePreparationTimeInTimeFrame(LocalTime from, LocalTime to) throws DishException {
+    public int getAveragePreparationTimeInTimeFrame(LocalTime from, LocalTime to) throws DishException {
         int sumOfPreparationTime = 0;
         int dishNumber = 0;
         int result;
@@ -74,7 +74,7 @@ public class OrderList {
             }
         }
         try {
-            result = (int)(sumOfPreparationTime/dishNumber);
+            result = sumOfPreparationTime/dishNumber;
         } catch (ArithmeticException e) {
             throw new DishException("There are no ordered dishes in this time frame "
                     + from + " - " + to + " " + e.getLocalizedMessage());
@@ -92,7 +92,7 @@ public class OrderList {
     }
 
 
-    public String allOrdersForTable(Table table){
+    public String getAllOrdersForTable(Table table){
         String tableNumberString;
         if (table.getTableNumber() > 0 && table.getTableNumber() < 10) {
             tableNumberString = " " + table.getTableNumber();
@@ -102,11 +102,11 @@ public class OrderList {
 
         String text1 = "** Orders for table no. " + tableNumberString + " **";
         String text2 = "****";
-        String text3 = "";
+        StringBuilder text3 = new StringBuilder();
         String text4 = "******";
         for (Order order : orderList){
             if (order.getTable().getTableNumber() == table.getTableNumber()){
-                text3 += "\n"+order.toString();
+                text3.append("\n").append(order);
             }
         }
         return text1 + "\n" + text2 + "\n" + text3 + "\n\n" + text4;
@@ -116,9 +116,9 @@ public class OrderList {
 
         int lineNumber = 0;
         String line = "";
-        String[] items = new String[0];
-        String imagesAll = "";
-        String[] images = new String[0];
+        String[] items;
+        String imagesAll;
+        String[] images;
 
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(filename)))){
             while(scanner.hasNextLine()){
@@ -131,7 +131,9 @@ public class OrderList {
                 imagesAll = items[6].substring(1,items[6].length()-1);
                 images = imagesAll.split(delimeter2);
                 ArrayList<String> imagesList = new ArrayList<>();
-                for (int i = 0; i<images.length;i++){imagesList.add(images[i].trim());}
+                for (String image : images) {
+                    imagesList.add(image.trim());
+                }
 
                 Table table = new Table(Integer.parseInt(items[0]));
                 Waiter waiter = new Waiter(Integer.parseInt(items[1]),items[2]);
@@ -140,6 +142,8 @@ public class OrderList {
                         Integer.parseInt(items[5]),
                         imagesList,Category.valueOf(items[7]));
                 Order order = new Order(table,waiter,dish,Integer.parseInt(items[8]),LocalTime.parse(items[9]));
+
+                if (!Objects.equals(items[10], "00:00")) {order.setFulfilmentTime(LocalTime.parse(items[10]));}
                 orderList.add(order);
 
 
