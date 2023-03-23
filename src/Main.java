@@ -14,6 +14,7 @@ public class Main {
         // Reading the dishesList and orders from txt files.
         try {
             dishesList.readFromTxt(Settings.getFilename(),Settings.getDelimeter1(),Settings.getDelimeter2());
+            Menu.readFromTxt(Settings.getFilenameMenu(),Settings.getDelimeter1(),Settings.getDelimeter2());
             orders.readFromTxt(Settings.getFilenameOrders(),Settings.getDelimeter1(),Settings.getDelimeter2());
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());
@@ -22,7 +23,7 @@ public class Main {
         System.out.println(dishesList);
         System.out.println(orders.getOrderList());
 
-        /*
+
         // Create 2 waiters
         Waiter waiter1 = new Waiter(1,"Tom");
         Waiter waiter2 = new Waiter(2,"Lenka");
@@ -161,15 +162,10 @@ public class Main {
         // Write all data to txt
         try {
             dishesList.saveToTxt(Settings.getFilename(),Settings.getDelimeter1());
+            Menu.saveToTxt(Settings.getFilenameMenu(),Settings.getDelimeter1());
             orders.saveToTxt(Settings.getFilenameOrders(),Settings.getDelimeter1());
         } catch (DishException e) {
             System.err.println(e.getLocalizedMessage());
         }
-
-        */
-
     }
-
-
-
 }

@@ -1,6 +1,3 @@
 Kuřecí řízek obalovaný 150 g;156;20;[kureci_rizek_obalovany_1, kureci_rizek_obalovany_2];MAIN_DISH
-Hranolky 150 g;50;15;[Hranolky_1, Hranolky_2, Hranolky_3];SIDE
 Pstruh na víně 200 g;195;35;[Pstruh_na_vine_1, Pstruh_na_vine_2, Pstruh_na_vine_3];MAIN_DISH
-Česnečka;65;5;[Cesnecka_1];SOUP
-Jablečný závin 110 g;95;10;[Jablecny_zavin_1];DESSERT
 Guláš 150 g;145;25;[Gulas_1, Gulas_2];MAIN_DISH
