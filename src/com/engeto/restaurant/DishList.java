@@ -1,7 +1,7 @@
 package com.engeto.restaurant;
 
 import java.io.*;
-import java.time.format.DateTimeParseException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,9 +10,9 @@ public class DishList extends ArrayList<Dish> {
 
         int lineNumber = 0;
         String line = "";
-        String[] items = new String[0];
-        String imagesAll = "";
-        String[] images = new String[0];
+        String[] items;
+        String imagesAll;
+        String[] images;
 
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(filename)))){
             while(scanner.hasNextLine()){
@@ -20,16 +20,19 @@ public class DishList extends ArrayList<Dish> {
                 line = scanner.nextLine();
                 items = line.split(delimeter1);
 
-                if (items.length != 5) throw new DishException("Wrong number of items on row: " + lineNumber);
+                if (items.length != 5) throw new DishException(
+                        "Wrong number of items on row: "
+                                + lineNumber + "Please check the file: " + Settings.getFilename());
 
                 imagesAll = items[3].substring(1,items[3].length()-1);
                 images = imagesAll.split(delimeter2);
                 ArrayList<String> imagesList = new ArrayList<>();
-                for (int i = 0; i<images.length;i++){imagesList.add(images[i].trim());}
-
+                for (String image : images) {
+                    imagesList.add(image.trim());
+                }
 
                 Dish dish = new Dish(items[0],
-                        Integer.parseInt(items[1]),
+                        new BigDecimal(items[1]),
                         Integer.parseInt(items[2]),
                         imagesList,Category.valueOf(items[4]));
                 add(dish);
@@ -63,5 +66,4 @@ public class DishList extends ArrayList<Dish> {
             throw new DishException("There is problem with file writing " + e.getLocalizedMessage());
         }
     }
-
 }

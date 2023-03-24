@@ -27,7 +27,7 @@ public class Waiter {
 
     @Override
     public String toString() {
-        return name +" No."+ waiterNum;
+        return name + " Waiter number_" + waiterNum;
     }
 
 }

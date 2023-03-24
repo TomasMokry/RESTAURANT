@@ -1,17 +1,18 @@
 package com.engeto.restaurant;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Dish {
     private String title;
-    private int price;
+    private BigDecimal price;
     private int preparationTime;
     private ArrayList<String> images;
     private String mainImage;
     private Category category;
 
-    public Dish(String title, int price, int preparationTime, ArrayList<String> images, Category category) {
+    public Dish(String title, BigDecimal price, int preparationTime, ArrayList<String> images, Category category) {
         this.title = title;
         this.price = price;
         this.preparationTime = preparationTime;
@@ -28,11 +29,11 @@ public class Dish {
         this.title = title;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

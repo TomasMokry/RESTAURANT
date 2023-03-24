@@ -1,5 +1,6 @@
 import com.engeto.restaurant.*;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Map;
@@ -51,12 +52,18 @@ public class Main {
         dishImages6.add("Gulas_2");
 
         // Create 3 dishes and adding them into dishesList
-        dishesList.add(new Dish("Kuřecí řízek obalovaný 150 g", 156,20,dishImages1,Category.MAIN_DISH));
-        dishesList.add(new Dish("Hranolky 150 g", 50,15,dishImages2,Category.SIDE));
-        dishesList.add(new Dish("Pstruh na víně 200 g", 195,35,dishImages3,Category.MAIN_DISH));
-        dishesList.add(new Dish("Česnečka", 65,5,dishImages4,Category.SOUP));
-        dishesList.add(new Dish("Jablečný závin 110 g", 95,10,dishImages5,Category.DESSERT));
-        dishesList.add(new Dish("Guláš 150 g", 145,25,dishImages6,Category.MAIN_DISH ));
+        dishesList.add(new Dish("Kuřecí řízek obalovaný 150 g",
+                BigDecimal.valueOf(156),20,dishImages1,Category.MAIN_DISH));
+        dishesList.add(new Dish("Hranolky 150 g",
+                BigDecimal.valueOf(50),15,dishImages2,Category.SIDE));
+        dishesList.add(new Dish("Pstruh na víně 200 g",
+                BigDecimal.valueOf(195),35,dishImages3,Category.MAIN_DISH));
+        dishesList.add(new Dish("Česnečka",
+                BigDecimal.valueOf(65),5,dishImages4,Category.SOUP));
+        dishesList.add(new Dish("Jablečný závin 110 g",
+                BigDecimal.valueOf(95),10,dishImages5,Category.DESSERT));
+        dishesList.add(new Dish("Guláš 150 g",
+                BigDecimal.valueOf(145),25,dishImages6,Category.MAIN_DISH ));
 
         // Create menu and Add first and third dish into menu
         try {
@@ -95,6 +102,12 @@ public class Main {
         TableNotes.addNote(table15,"Great meal and " + waiter1.getName() + " was supper friendly");
         TableNotes.addNote(table2,"We love this restaurant, food great but " + waiter2.getName()+ " was mean.");
 
+        // Print today's Menu
+        System.out.println("---\n");
+        System.out.println("Today's menu is: ");
+        Menu.getMenuList().forEach(System.out::println);
+
+
         // How many orders all together
         System.out.println("---\n");
         System.out.println("Number of all orders:");
@@ -127,10 +140,10 @@ public class Main {
         // Total price for all orders for each waiter
         System.out.println("---\n");
         System.out.println("Total price for all orders for each waiter:");
-        Map<Waiter,Integer> sumOrdersPricePerWaiter = orders.getSumOrdersPricePerWaiter();
-        for (Map.Entry<Waiter,Integer> entry : sumOrdersPricePerWaiter.entrySet()){
+        Map<Waiter,BigDecimal> sumOrdersPricePerWaiter = orders.getSumOrdersPricePerWaiter();
+        for (Map.Entry<Waiter,BigDecimal> entry : sumOrdersPricePerWaiter.entrySet()){
             Waiter key = entry.getKey();
-            Integer value = entry.getValue();
+            BigDecimal value = entry.getValue();
             System.out.println(key + " : " + value + ",- Kč");
         }
 

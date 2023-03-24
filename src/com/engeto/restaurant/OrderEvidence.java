@@ -1,6 +1,7 @@
 package com.engeto.restaurant;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.*;
@@ -34,15 +35,16 @@ public class OrderEvidence {
         return openOrders;
     }
 
-    public Map<Waiter, Integer> getSumOrdersPricePerWaiter(){
-        Map<Waiter, Integer> waiterPricesMap = new HashMap<>();
+    public Map<Waiter, BigDecimal> getSumOrdersPricePerWaiter(){
+        Map<Waiter, BigDecimal> waiterPricesMap = new HashMap<>();
 
         for (Order order : orderList){
             if (! waiterPricesMap.containsKey(order.getWaiter())){
-                waiterPricesMap.put(order.getWaiter(), order.getDish().getPrice());
+                waiterPricesMap.put(order.getWaiter(),
+                        order.getDish().getPrice().multiply(new BigDecimal(order.getDishNumber())));
             } else {
-                int subCount = waiterPricesMap.get(order.getWaiter());
-                subCount += order.getDish().getPrice();
+                BigDecimal subCount = waiterPricesMap.get(order.getWaiter());
+                subCount = subCount.add(order.getDish().getPrice().multiply(new BigDecimal(order.getDishNumber())));
                 waiterPricesMap.put(order.getWaiter(),subCount);
             }
         }
@@ -83,7 +85,6 @@ public class OrderEvidence {
         return result;
     }
 
-
     public Set<Dish> getDishSet(){
         Set<Dish> dishSet = new HashSet<>();
         for (Order order : orderList){
@@ -91,7 +92,6 @@ public class OrderEvidence {
         }
         return dishSet;
     }
-
 
     public String getAllOrdersForTable(Table table){
         String tableNumberString;
@@ -127,7 +127,8 @@ public class OrderEvidence {
                 line = scanner.nextLine();
                 items = line.split(delimeter1);
 
-                if (items.length != 11) throw new DishException("Wrong number of items on row: " + lineNumber);
+                if (items.length != 11) throw new DishException("Wrong number of items on row: "
+                        + lineNumber + "Please check the file: " + Settings.getFilenameOrders());
 
                 imagesAll = items[6].substring(1,items[6].length()-1);
                 images = imagesAll.split(delimeter2);
@@ -139,15 +140,13 @@ public class OrderEvidence {
                 Table table = new Table(Integer.parseInt(items[0]));
                 Waiter waiter = new Waiter(Integer.parseInt(items[1]),items[2]);
                 Dish dish = new Dish(items[3],
-                        Integer.parseInt(items[4]),
+                        new BigDecimal(items[4]),
                         Integer.parseInt(items[5]),
                         imagesList,Category.valueOf(items[7]));
                 Order order = new Order(table,waiter,dish,Integer.parseInt(items[8]),LocalTime.parse(items[9]));
 
                 if (!Objects.equals(items[10], "00:00")) {order.setFulfilmentTime(LocalTime.parse(items[10]));}
                 orderList.add(order);
-
-
             }
 
         } catch (FileNotFoundException e) {
@@ -188,6 +187,4 @@ public class OrderEvidence {
             throw new DishException("There is problem with file writing " + e.getLocalizedMessage());
         }
     }
-
-
 }

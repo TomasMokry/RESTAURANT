@@ -1,6 +1,7 @@
 package com.engeto.restaurant;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,7 +44,8 @@ public class Menu {
                 line = scanner.nextLine();
                 items = line.split(delimeter1);
 
-                if (items.length != 5) throw new DishException("Wrong number of items in Menu on row: " + lineNumber);
+                if (items.length != 5) throw new DishException("Wrong number of items on row: "
+                        + lineNumber + "Please check the file: " + Settings.getFilenameMenu());
 
                 imagesAll = items[3].substring(1,items[3].length()-1);
                 images = imagesAll.split(delimeter2);
@@ -54,7 +56,7 @@ public class Menu {
 
 
                 Dish dish = new Dish(items[0],
-                        Integer.parseInt(items[1]),
+                        new BigDecimal(items[1]),
                         Integer.parseInt(items[2]),
                         imagesList,Category.valueOf(items[4]));
                 menuList.add(dish);

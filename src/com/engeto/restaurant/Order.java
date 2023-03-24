@@ -14,13 +14,13 @@ public class Order{
     private LocalTime orderedTime;
     private LocalTime fulfillmentTime;
 
-    public Order(Table table, Waiter waiter, Dish dish, int dishNumber, LocalTime orderedTime) throws DishException {
+    public Order(Table table, Waiter waiter, Dish dish, int dishCount, LocalTime orderedTime) throws DishException {
 
         this.id = nextId++;
         this.table = table;
         this.waiter = waiter;
         this.setDish(dish);
-        this.dishNumber = dishNumber;
+        this.dishNumber = dishCount;
         this.orderedTime = orderedTime;
         this.fulfillmentTime = LocalTime.MIN;
 
@@ -78,9 +78,9 @@ public class Order{
         this.fulfillmentTime = fulfilmentTime;
     }
 
-    public void setDish(Dish dish) throws DishException{
+    public void setDish(Dish dish) throws DishException {
         if (! Menu.getMenuList().contains(dish)){
-            throw new DishException("This dish " +dish.getTitle()+ " is not in the Menu " + Menu.getMenuList());
+            throw new DishException("This dish " + dish.getTitle() + " is not in the Menu " + Menu.getMenuList());
         } else {this.dish = dish;}
     }
 
