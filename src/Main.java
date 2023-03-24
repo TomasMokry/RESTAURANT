@@ -1,3 +1,8 @@
+//první projekt do Engeto Online Java Akademie
+//author: Tomáš Mokrý
+//email: tomas.mokry@gmail.com
+//discord: Tomas M#0922
+
 import com.engeto.restaurant.*;
 
 import java.math.BigDecimal;
